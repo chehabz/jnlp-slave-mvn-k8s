@@ -21,7 +21,7 @@ spec:
             git 'https://github.com/jglick/simple-maven-project-with-tests.git'
             container('maven') {
                 stage('Build a Maven project') {
-                    sh 'mvn -B clean install'
+                    sh 'mvn -f src/pom.xml clean install'
                     sh 'kubectl version'
                     sh 'helm help'
                     sh 'echo Finsihed'
