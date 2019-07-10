@@ -17,15 +17,25 @@ spec:
 ) 
 {
     node(label) {
-        stage('Get a Maven project') {
-            git 'https://github.com/jglick/simple-maven-project-with-tests.git'
+        stage('Prepare') {
+            git 'https://github.com/chehabz/whale-detector-crypto'
+        }
+        
+        stage('Clean  &  Install Packages') {
             container('maven') {
-                stage('Build a Maven project') {
-                    sh 'mvn -f src/pom.xml clean install'
-                    sh 'kubectl version'
-                    sh 'helm help'
-                    sh 'echo Finsihed'
-                }
+                sh 'mvn -f src/pom.xml clean install'
+            }
+        }
+
+        stage('Kubectl') {
+            container('maven') {
+                sh 'kubectl version'
+            }
+        }
+
+        stage('List the directory') {
+            container('maven') {
+                sh 'ls -l'
             }
         }
     }
