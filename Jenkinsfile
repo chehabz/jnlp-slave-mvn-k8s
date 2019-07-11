@@ -32,7 +32,16 @@ spec:
                 sh 'kubectl version'
             }
         }
-
+        stage('Helm version') {
+            container('maven') {
+                sh 'helm help'
+            }
+        }
+         stage('Helm version') {
+            container('maven') {
+                sh 'docker -v'
+            }
+        }
         stage('List the directory') {
             container('maven') {
                 sh 'ls -l'
